@@ -339,7 +339,7 @@ namespace Mastermind
             if (MastermindWindow.Title.IndexOf("Poging")>0)
             {
                 MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
-                MastermindWindow.Title += $"Poging {attempts}";
+                MastermindWindow.Title += $"Poging {attempts}"; 
             }
             
 
