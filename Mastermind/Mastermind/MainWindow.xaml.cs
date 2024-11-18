@@ -1,13 +1,16 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Schema;
 
 namespace Mastermind
 {
@@ -222,6 +225,8 @@ namespace Mastermind
                     break;
             }
 
+
+
             switch (colorCode2 % 6)
             {
                 case 0:
@@ -306,6 +311,7 @@ namespace Mastermind
                     break;
             }
 
+            debugTextBox.Text = MastermindWindow.Title.Substring(MastermindWindow.Title.IndexOf("\t") + 1);
             controlButton.IsEnabled = true;
         }
 
@@ -447,7 +453,15 @@ namespace Mastermind
 
                 attempts += 1;
 
-                MastermindWindow.Title += $"\tPoging {attempts}";
+                if (MastermindWindow.Title.IndexOf("\tPoging") > 0)
+                {
+                    MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
+                    MastermindWindow.Title += $"Poging {attempts}";
+                }
+                else
+                {
+                    MastermindWindow.Title += $"\tPoging {attempts}";
+                }
             }
             else
             {
@@ -457,6 +471,8 @@ namespace Mastermind
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            debugTextBox.Visibility = Visibility.Hidden;
+
             code1ComboBox.Items.Add("");
             code2ComboBox.Items.Add("");
             code3ComboBox.Items.Add("");
@@ -509,6 +525,26 @@ namespace Mastermind
             }
         }
 
+        private void Toggleddebug()
+        {
+            if(debugTextBox.Visibility == Visibility.Visible)
+            {
+                debugTextBox.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                debugTextBox.Visibility = Visibility.Visible;
+            }
+            
+        }
+
+        private void MastermindWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F12 && e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                Toggleddebug();
+            }
+        }
     }
 
 }

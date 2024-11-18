@@ -8,7 +8,8 @@
         Title="Mastermind" Height="800" Width="1290"
         Name="MastermindWindow"
         Loaded="Window_Loaded"
-        Background="gray">
+        Background="gray"
+        KeyDown="MastermindWindow_KeyDown">
     <Grid Margin="0,0,10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="27*"/>
@@ -27,5 +28,6 @@
 
         <Button IsEnabled="False" Click="controlButton_Click" Name="controlButton" Content="Controleer code" Padding="8" HorizontalAlignment="Left" Margin="450,235,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Button Click="generateButton_Click" x:Name="generateButton_Copy" Content="Genereer code" Padding="8" HorizontalAlignment="Left" Margin="263,235,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox Name="debugTextBox" Visibility="Hidden" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="120,606,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="595" Height="136"/>
     </Grid>
 </Window>
