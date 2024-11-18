@@ -335,8 +335,13 @@ namespace Mastermind
             /// </summary>
             
             attempts++;
-            MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
-            MastermindWindow.Title += $"Poging {attempts}";
+
+            if (MastermindWindow.Title.IndexOf("Poging")>0)
+            {
+                MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
+                MastermindWindow.Title += $"Poging {attempts}";
+            }
+            
 
             timer.Stop();
         }
