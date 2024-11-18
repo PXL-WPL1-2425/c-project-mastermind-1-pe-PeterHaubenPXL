@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Schema;
 
 namespace Mastermind
@@ -27,6 +28,8 @@ namespace Mastermind
         int colorCode4 = 0;
 
         int attempts = 0;
+
+        DispatcherTimer timer= new DispatcherTimer();
 
         public MainWindow()
         {
@@ -173,6 +176,8 @@ namespace Mastermind
         {
             attempts = 0;
 
+            StartCountdown();
+
             Random rnd = new Random();
 
             colorCode1 = rnd.Next(0, 24);
@@ -313,6 +318,21 @@ namespace Mastermind
 
             debugTextBox.Text = MastermindWindow.Title.Substring(MastermindWindow.Title.IndexOf("\t") + 1);
             controlButton.IsEnabled = true;
+
+            
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            attempts++;
+            MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
+            MastermindWindow.Title += $"Poging {attempts}"; MastermindWindow.Title =
+        }
+
+
+        private void StartCountdown()
+        {
+            timer.Start();
         }
 
         private void controlButton_Click(object sender, RoutedEventArgs e)
@@ -462,6 +482,8 @@ namespace Mastermind
                 {
                     MastermindWindow.Title += $"\tPoging {attempts}";
                 }
+
+                StartCountdown();
             }
             else
             {
@@ -472,6 +494,7 @@ namespace Mastermind
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             debugTextBox.Visibility = Visibility.Hidden;
+
 
             code1ComboBox.Items.Add("");
             code2ComboBox.Items.Add("");
@@ -523,6 +546,9 @@ namespace Mastermind
                     code4ComboBox.Items.Add("Blue");
                 }
             }
+
+            timer.Interval = new TimeSpan(0, 0, 10); //Elke Miliseconde
+            timer.Tick += Timer_Tick;
         }
 
         private void Toggleddebug()
