@@ -324,11 +324,21 @@ namespace Mastermind
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            attempts++;
-            MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
-            MastermindWindow.Title += $"Poging {attempts}"; MastermindWindow.Title =
+            
+
+            StopCountdown();
+
+
         }
 
+        private void StopCountdown()
+        {
+            attempts++;
+            MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
+            MastermindWindow.Title += $"Poging {attempts}";
+
+            timer.Stop();
+        }
 
         private void StartCountdown()
         {
