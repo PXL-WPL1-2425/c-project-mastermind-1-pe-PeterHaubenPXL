@@ -324,15 +324,16 @@ namespace Mastermind
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            
-
             StopCountdown();
-
-
         }
 
         private void StopCountdown()
         {
+            /// <summary>
+            /// The timer = stoped and
+            /// attemps + 1
+            /// </summary>
+            
             attempts++;
             MastermindWindow.Title = MastermindWindow.Title.Substring(0, MastermindWindow.Title.IndexOf("Poging"));
             MastermindWindow.Title += $"Poging {attempts}";
@@ -342,6 +343,12 @@ namespace Mastermind
 
         private void StartCountdown()
         {
+            /// <summary>
+            /// The timer = started and
+            /// from in generateButton_Click or
+            /// from in controlButton_Click
+            /// </summary>
+
             timer.Start();
         }
 
@@ -561,9 +568,12 @@ namespace Mastermind
             timer.Tick += Timer_Tick;
         }
 
-        private void Toggleddebug()
+        private void Toggledebug()
         {
-            if(debugTextBox.Visibility == Visibility.Visible)
+            ///<summary>
+            ///Make  visible or hidden
+            /// </summary>
+            if (debugTextBox.Visibility == Visibility.Visible)
             {
                 debugTextBox.Visibility = Visibility.Hidden;
             }
@@ -578,7 +588,7 @@ namespace Mastermind
         {
             if (e.Key == Key.F12 && e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {
-                Toggleddebug();
+                Toggledebug();
             }
         }
     }
